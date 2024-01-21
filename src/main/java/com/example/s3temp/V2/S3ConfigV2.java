@@ -16,7 +16,7 @@ import lombok.Getter;
 
 @Configuration
 @Getter
-public class AmazonConfig {
+public class S3ConfigV2 {
 
 	private AWSCredentials awsCredentials;
 

@@ -24,7 +24,7 @@ public class S3ServiceV2{
 
 	private final AmazonS3 amazonS3;
 
-	private final AmazonConfig s3Config;
+	private final S3ConfigV2 s3ConfigV2;
 
 	public String uploadFile(MultipartFile file) {
 		String filePath =
@@ -33,17 +33,17 @@ public class S3ServiceV2{
 		metadata.setContentLength(file.getSize());
 		try {
 			amazonS3.putObject(
-				new PutObjectRequest(s3Config.getBucket(), s3Config.getFolder() + filePath, file.getInputStream(),
+				new PutObjectRequest(s3ConfigV2.getBucket(), s3ConfigV2.getFolder() + filePath, file.getInputStream(),
 					metadata));
 		} catch (IOException e) {
 			log.error("error at AmazonS3Manager uploadFile : {}", (Object)e.getStackTrace());
 		}
 
-		return amazonS3.getUrl(s3Config.getBucket(), filePath).toString();
+		return amazonS3.getUrl(s3ConfigV2.getBucket(), filePath).toString();
 	}
 
 	public String deleteImage(String image) {
-		amazonS3.deleteObject(s3Config.getBucket(), s3Config.getFolder() + image);
+		amazonS3.deleteObject(s3ConfigV2.getBucket(), s3ConfigV2.getFolder() + image);
 		return "삭제 성공";
 	}
 
