@@ -21,8 +21,7 @@ public class S3ControllerV2 {
 	private final S3ServiceV2 s3Service;
 
 	@PostMapping(value = "/uploadImage", consumes = "multipart/form-data")
-	public ResponseEntity uploadImage(@RequestPart(value = "file", required = false) MultipartFile file) throws
-		Exception {
+	public ResponseEntity uploadImage(@RequestPart(value = "file", required = false) MultipartFile file){
 		String url = s3Service.uploadFile(file);
 		return new ResponseEntity<>(url, HttpStatus.OK);
 	}
@@ -34,8 +33,7 @@ public class S3ControllerV2 {
 	}
 
 	@PostMapping(value = "/uploadImages", consumes = "multipart/form-data")
-	public ResponseEntity uploadImages(@RequestPart(value = "files", required = false) List<MultipartFile> files) throws
-		Exception {
+	public ResponseEntity uploadImages(@RequestPart(value = "files", required = false) List<MultipartFile> files) {
 		List<String> urls = s3Service.uploadFiles(files);
 		return new ResponseEntity<>(urls, HttpStatus.OK);
 	}

@@ -19,8 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class S3ServiceV2{
-
+public class S3ServiceV2 {
 
 	private final AmazonS3 amazonS3;
 
@@ -48,13 +47,9 @@ public class S3ServiceV2{
 	}
 
 	public List<String> uploadFiles(List<MultipartFile> files) {
-		List<String> fileUrls = new ArrayList<>();
-
-		files.stream().map(file -> {
-			fileUrls.add(uploadFile(file));
-			return fileUrls;
-		}).collect(Collectors.toList());
-		return fileUrls;
+		return files.stream()
+			.map(this::uploadFile)
+			.toList();
 	}
 
 }
