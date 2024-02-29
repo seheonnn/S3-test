@@ -26,7 +26,7 @@ public class S3ControllerV2 {
 		return new ResponseEntity<>(url, HttpStatus.OK);
 	}
 
-	@DeleteMapping(value = "/deleteImage", consumes = "multipart/form-data")
+	@DeleteMapping(value = "/deleteImage")
 	public ResponseEntity deleteImage(@RequestPart(value = "path", required = false) String path) {
 		String image = path.substring(path.lastIndexOf('/') + 1);
 		return new ResponseEntity<>(s3Service.deleteImage(image), HttpStatus.OK);
